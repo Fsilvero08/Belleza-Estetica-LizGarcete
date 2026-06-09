@@ -4,12 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belleza Estética Liz Garcete</title>
 
-    <title>Belleza Estetica Liz Garcete</title>
-
-    <link href="bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -19,233 +16,382 @@
             --principal: #E8B4B8;
             --principal-hover: #F3C9CD;
             --texto: #ffffff;
+            --dorado: #c8b38a;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            background: #111111;
-            color: white;
-
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
         }
 
+        /* ── NAVBAR ── */
         .navbar {
             background: transparent !important;
             position: absolute;
             width: 100%;
             z-index: 999;
+            padding: 20px 0;
         }
 
         .navbar-brand {
             color: white !important;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-family: cursive;
         }
 
         .nav-link {
             color: white !important;
             margin-left: 15px;
-            transition: .3s;
+            transition: color .3s;
         }
 
         .nav-link:hover {
-            color: #e8b4b8 !important;
+            color: var(--principal) !important;
         }
 
+        /* ── HERO ── */
         .hero {
             min-height: 100vh;
-
             background:
                 linear-gradient(90deg,
-                    rgba(0, 0, 0, .85) 20%,
+                    rgba(0, 0, 0, .88) 20%,
                     rgba(0, 0, 0, .45) 60%,
                     rgba(0, 0, 0, .15) 100%),
-                url('img.png');
-
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-
+                url('img.png') center/cover no-repeat;
             display: flex;
             align-items: center;
-            position: relative;
+            padding: 120px 0 80px;
         }
 
         .hero-content {
-            max-width: 650px;
+            max-width: 620px;
             padding-left: 8%;
         }
 
         .hero-subtitle {
-            color: #c8b38a;
+            color: var(--dorado);
             letter-spacing: 4px;
             text-transform: uppercase;
-            font-size: .9rem;
-            margin-bottom: 15px;
+            font-size: .85rem;
+            margin-bottom: 16px;
         }
 
         .hero-title {
-            font-size: 5rem;
+            font-size: clamp(3rem, 6vw, 5rem);
             font-weight: 300;
             color: white;
             line-height: 1.1;
+            margin-bottom: 0;
         }
 
         .hero-title span {
-            color: #e8b4b8;
-            font-weight: 600;
+            color: var(--principal);
+            font-weight: 700;
         }
 
         .hero-text {
             color: #d6d6d6;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             margin-top: 20px;
             margin-bottom: 35px;
+            max-width: 480px;
         }
 
-        .btn-vermas {
-            background: #e8b4b8;
+        /* ── BOTÓN PRIMARIO (reutilizable) ── */
+        .btn-rosa {
+            background: var(--principal);
             color: #111;
-            padding: 14px 35px;
+            padding: 13px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: .3s;
+            border: none;
+            cursor: pointer;
+            transition: background .3s, transform .3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .btn-vermas:hover {
-            background: #f5d1d4;
+        .btn-rosa:hover {
+            background: var(--principal-hover);
             transform: translateY(-3px);
+            color: #111;
         }
 
+        /* ── BOTÓN FLOTANTE WHATSAPP ── */
         .btn-flotante-reserva {
             position: fixed;
-            bottom: 20px;
-            right: 95px;
-
-            background: #E8B4B8;
+            bottom: 24px;
+            right: 24px;
+            background: var(--principal);
             color: #111;
-
             padding: 14px 22px;
-
             border-radius: 50px;
-
             text-decoration: none;
-
             font-weight: 600;
-
             display: flex;
             align-items: center;
             gap: 10px;
-
             z-index: 1000;
-
-            box-shadow: 0 5px 20px rgba(0, 0, 0, .3);
-
-            transition: .3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .35);
+            transition: background .3s, transform .3s;
         }
 
         .btn-flotante-reserva:hover {
-            background: #f5d1d4;
+            background: var(--principal-hover);
             color: #111;
             transform: translateY(-3px);
+        }
+
+        /* ── SECCIÓN FILTROS ── */
+        #catalogo {
+            padding: 80px 0 60px;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
-            font-size: 3rem;
+            margin-bottom: 50px;
+            font-size: clamp(2rem, 4vw, 3rem);
             color: white;
             font-weight: 300;
         }
 
         .section-title::after {
             content: '';
-            width: 100px;
+            width: 80px;
             height: 3px;
-            background: #e8b4b8;
+            background: var(--principal);
             display: block;
-            margin: 15px auto;
+            margin: 14px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Barra de filtros */
+        .filtros {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .btn-filtro {
+            background: transparent;
+            color: #aaa;
+            padding: 10px 26px;
+            border-radius: 50px;
+            border: 1px solid rgba(232, 180, 184, .35);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all .3s;
+        }
+
+        .btn-filtro:hover,
+        .btn-filtro.activo {
+            background: var(--principal);
+            color: #111;
+            border-color: var(--principal);
+        }
+
+        /* Tarjetas de contenido */
+        .contenido {
+            animation: fadeUp .4s ease;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card {
             background: rgba(255, 255, 255, .03);
             backdrop-filter: blur(10px);
-
-            border: 1px solid rgba(232, 180, 184, .2);
-
+            border: 1px solid rgba(232, 180, 184, .18);
             border-radius: 20px;
-
-            transition: .4s;
+            transition: transform .4s, border-color .4s, box-shadow .4s;
+            height: 100%;
         }
 
         .card:hover {
-            transform: translateY(-10px);
-
-            border-color: #e8b4b8;
-
-            box-shadow:
-                0 10px 40px rgba(232, 180, 184, .15);
+            transform: translateY(-8px);
+            border-color: var(--principal);
+            box-shadow: 0 10px 40px rgba(232, 180, 184, .15);
         }
 
-        html {
-            scroll-behavior: smooth;
+        .card-body {
+            padding: 28px;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--principal);
+            margin-bottom: 14px;
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-text {
+            color: #bbb;
+            font-size: .95rem;
+            line-height: 1.6;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 576px) {
+            .hero-content {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .btn-flotante-reserva span {
+                display: none;
+            }
+
+            .btn-flotante-reserva {
+                padding: 14px 18px;
+            }
         }
     </style>
 </head>
 
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                Belleza Estetica Liz Garcete
-            </a>
+            <a class="navbar-brand" href="#">Belleza Estética Liz Garcete</a>
         </div>
     </nav>
 
-    <nav>
-        <a href="#servicios">Servicios</a>
-        <a href="#cursos">Cursos</a>
-        <a href="#galeria">Galeria</a>
-    </nav>
-
+    <!-- HERO -->
     <section class="hero">
-
         <div class="hero-content">
-
-            <div class="hero-subtitle">
-                BELLEZA • ESTILO • ELEGANCIA
-            </div>
-
-            <h1 class="hero-title">
-                Somos tu
-                <span>belleza</span>
-            </h1>
-
-            <p class="hero-text">
-                Realzamos tu belleza con técnicas modernas y atención personalizada.
-            </p>
-
-            <a href="https://wa.me/595991948939?text=Hola. Quiero agendar una cita." class="btn-flotante-reserva"
-                target="_blank">
-                <i class="fas fa-calendar-check"></i>
-                Reservar cita
-            </a>
-
-            <a href="#cursos" class="btn-vermas">
-                Ver Mas
+            <div class="hero-subtitle">BELLEZA • ESTILO • ELEGANCIA</div>
+            <h1 class="hero-title">Somos tu<br><span>belleza</span></h1>
+            <p class="hero-text">Realzamos tu belleza con técnicas modernas y atención personalizada.</p>
+            <a href="#catalogo" class="btn-rosa">
+                <i class="fas fa-sparkles"></i> Ver servicios
             </a>
         </div>
-
     </section>
 
-    <section id="servicios">...</section>
-    <section id="cursos">...</section>
-    <section id="galeria">...</section>
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
+    <a href="https://wa.me/595991948939?text=Hola.%20Quiero%20agendar%20una%20cita." class="btn-flotante-reserva"
+        target="_blank" rel="noopener noreferrer" aria-label="Reservar cita por WhatsApp">
+        <i class="fas fa-calendar-check"></i>
+        <span>Reservar cita</span>
+    </a>
 
+    <!-- CATÁLOGO CON FILTROS -->
+    <section id="catalogo">
+        <div class="container">
+            <h2 class="section-title">Nuestro catálogo</h2>
 
+            <!-- Filtros -->
+            <div class="filtros">
+                <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
+                <button class="btn-filtro" onclick="filtrar('servicios', this)">Servicios</button>
+                <button class="btn-filtro" onclick="filtrar('cursos', this)">Cursos</button>
+                <button class="btn-filtro" onclick="filtrar('promociones', this)">Promociones</button>
+            </div>
+
+            <!-- Tarjetas -->
+            <div class="row g-4">
+
+                <!-- SERVICIOS -->
+                <div class="col-md-4 contenido servicios">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon"><i class="fas fa-cut"></i></div>
+                            <h3 class="card-title">Corte & Coloración</h3>
+                            <p class="card-text">Cortes modernos y coloraciones personalizadas a cargo de profesionales.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 contenido servicios">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon"><i class="fas fa-spa"></i></div>
+                            <h3 class="card-title">Maquillaje profesional</h3>
+                            <p class="card-text">Looks para eventos, sesiones de fotos o el día a día.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CURSOS -->
+                <div class="col-md-4 contenido cursos">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <h3 class="card-title">Curso de maquillaje</h3>
+                            <p class="card-text">Aprende técnicas profesionales desde cero con nuestra metodología
+                                práctica.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROMOCIONES -->
+                <div class="col-md-4 contenido promociones">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-icon"><i class="fas fa-tag"></i></div>
+                            <h3 class="card-title">20% de descuento</h3>
+                            <p class="card-text">Durante este mes, todos los servicios de coloración tienen un 20% de
+                                descuento.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function filtrar(categoria, boton) {
+            // Actualizar estado visual del botón activo
+            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
+            if (boton) boton.classList.add('activo');
+
+            const items = document.querySelectorAll('.contenido');
+
+            items.forEach(item => {
+                const mostrar = categoria === 'todos' || item.classList.contains(categoria);
+                item.style.display = mostrar ? '' : 'none';
+                // Re-disparar animación
+                if (mostrar) {
+                    item.style.animation = 'none';
+                    void item.offsetHeight; // reflow
+                    item.style.animation = '';
+                }
+            });
+        }
+    </script>
 
 </body>
-
-</html>
 
 </html>
