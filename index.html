@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Belleza Estética Liz Garcete</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
     <style>
         :root {
             --fondo: #111111;
@@ -34,7 +32,7 @@
             margin: 0;
         }
 
-        /* ── NAVBAR ── */
+        /* NAVBAR */
         .navbar {
             background: transparent !important;
             position: absolute;
@@ -49,24 +47,11 @@
             font-family: cursive;
         }
 
-        .nav-link {
-            color: white !important;
-            margin-left: 15px;
-            transition: color .3s;
-        }
-
-        .nav-link:hover {
-            color: var(--principal) !important;
-        }
-
-        /* ── HERO ── */
+        /* HERO */
         .hero {
             min-height: 100vh;
             background:
-                linear-gradient(90deg,
-                    rgba(0, 0, 0, .88) 20%,
-                    rgba(0, 0, 0, .45) 60%,
-                    rgba(0, 0, 0, .15) 100%),
+                linear-gradient(90deg, rgba(0, 0, 0, .88) 20%, rgba(0, 0, 0, .45) 60%, rgba(0, 0, 0, .15) 100%),
                 url('img.png') center/cover no-repeat;
             display: flex;
             align-items: center;
@@ -91,7 +76,6 @@
             font-weight: 300;
             color: white;
             line-height: 1.1;
-            margin-bottom: 0;
         }
 
         .hero-title span {
@@ -104,10 +88,8 @@
             font-size: 1.1rem;
             margin-top: 20px;
             margin-bottom: 35px;
-            max-width: 480px;
         }
 
-        /* ── BOTÓN PRIMARIO (reutilizable) ── */
         .btn-rosa {
             background: var(--principal);
             color: #111;
@@ -129,7 +111,7 @@
             color: #111;
         }
 
-        /* ── BOTÓN FLOTANTE WHATSAPP ── */
+        /* BOTÓN FLOTANTE WHATSAPP */
         .btn-flotante-reserva {
             position: fixed;
             bottom: 24px;
@@ -154,9 +136,56 @@
             transform: translateY(-3px);
         }
 
-        /* ── SECCIÓN FILTROS ── */
+        /* CARRITO FLOTANTE */
+        .carrito-flotante {
+            position: fixed;
+            bottom: 24px;
+            right: 220px;
+            background: #1c1c1c;
+            border: 1px solid rgba(232, 180, 184, .35);
+            color: white;
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .35);
+            cursor: pointer;
+            transition: all .3s;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+        }
+
+        .carrito-flotante.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+
+        .carrito-flotante:hover {
+            background: #2a2a2a;
+            transform: translateY(-3px);
+        }
+
+        .carrito-badge {
+            background: var(--principal);
+            color: #111;
+            font-size: .75rem;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CATÁLOGO */
         #catalogo {
-            padding: 80px 0 60px;
+            padding: 80px 0 120px;
         }
 
         .section-title {
@@ -177,42 +206,54 @@
             border-radius: 2px;
         }
 
-        /* Barra de filtros */
-        .filtros {
+        /* TABS */
+        .nav-categorias {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 48px;
+            gap: 0;
+            margin-bottom: 0;
+            border-bottom: 1px solid rgba(232, 180, 184, .2);
         }
 
-        .btn-filtro {
+        .tab-link {
             background: transparent;
-            color: #aaa;
-            padding: 10px 26px;
-            border-radius: 50px;
-            border: 1px solid rgba(232, 180, 184, .35);
+            color: #888;
+            padding: 14px 32px;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
             transition: all .3s;
+            position: relative;
+            bottom: -1px;
         }
 
-        .btn-filtro:hover,
-        .btn-filtro.activo {
-            background: var(--principal);
-            color: #111;
-            border-color: var(--principal);
+        .tab-link:hover {
+            color: var(--principal);
         }
 
-        /* Tarjetas de contenido */
-        .contenido {
-            animation: fadeUp .4s ease;
+        .tab-link.activo {
+            color: var(--principal);
+            border-bottom: 3px solid var(--principal);
+        }
+
+        /* PANELES */
+        .panel {
+            display: none;
+            padding: 50px 0 20px;
+            animation: fadeUp .35s ease;
+        }
+
+        .panel.activo {
+            display: block;
         }
 
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(12px);
+                transform: translateY(14px);
             }
 
             to {
@@ -221,19 +262,26 @@
             }
         }
 
+        /* CARDS */
         .card {
             background: rgba(255, 255, 255, .03);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(232, 180, 184, .18);
             border-radius: 20px;
-            transition: transform .4s, border-color .4s, box-shadow .4s;
+            transition: transform .3s, border-color .3s, box-shadow .3s;
             height: 100%;
+            cursor: pointer;
         }
 
         .card:hover {
             transform: translateY(-8px);
             border-color: var(--principal);
             box-shadow: 0 10px 40px rgba(232, 180, 184, .15);
+        }
+
+        .card.en-carrito {
+            border-color: var(--principal);
+            background: rgba(232, 180, 184, .07);
         }
 
         .card-body {
@@ -259,7 +307,404 @@
             line-height: 1.6;
         }
 
-        /* ── RESPONSIVE ── */
+        .precio {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--principal);
+            margin-top: 12px;
+        }
+
+        .precio small {
+            font-size: .8rem;
+            font-weight: 400;
+            color: #888;
+        }
+
+        .badge-promo {
+            background: var(--principal);
+            color: #111;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        /* PANEL BANNER */
+        .panel-banner {
+            background: linear-gradient(135deg, rgba(232, 180, 184, .12) 0%, rgba(200, 179, 138, .08) 100%);
+            border: 1px solid rgba(232, 180, 184, .2);
+            border-radius: 20px;
+            padding: 36px 40px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .panel-banner-icon {
+            font-size: 3rem;
+            color: var(--principal);
+            flex-shrink: 0;
+        }
+
+        .panel-banner h3 {
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 300;
+            margin-bottom: 6px;
+        }
+
+        .panel-banner p {
+            color: #aaa;
+            margin: 0;
+            font-size: .95rem;
+        }
+
+        /* BOTÓN AGREGAR EN CARD */
+        .btn-agregar {
+            margin-top: 16px;
+            width: 100%;
+            background: transparent;
+            border: 1px solid rgba(232, 180, 184, .4);
+            color: var(--principal);
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: .9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all .3s;
+        }
+
+        .btn-agregar:hover {
+            background: var(--principal);
+            color: #111;
+        }
+
+        .btn-agregar.agregado {
+            background: var(--principal);
+            color: #111;
+        }
+
+        /* ─── MODAL ─── */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .75);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+        }
+
+        .modal-overlay.abierto {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: #1a1a1a;
+            border: 1px solid rgba(232, 180, 184, .25);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 520px;
+            padding: 40px;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform .3s;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.abierto .modal-box {
+            transform: translateY(0);
+        }
+
+        .modal-cerrar {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: rgba(255, 255, 255, .08);
+            border: none;
+            color: white;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-cerrar:hover {
+            background: rgba(255, 255, 255, .18);
+        }
+
+        .modal-icono {
+            font-size: 3rem;
+            color: var(--principal);
+            margin-bottom: 16px;
+        }
+
+        .modal-categoria {
+            color: var(--dorado);
+            font-size: .8rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .modal-titulo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .modal-desc {
+            color: #bbb;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .modal-detalles {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .modal-detalle-item {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(232, 180, 184, .15);
+            border-radius: 12px;
+            padding: 14px 16px;
+        }
+
+        .modal-detalle-item .label {
+            font-size: .75rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .modal-detalle-item .valor {
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .modal-acciones {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-wa {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 15px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: background .3s, transform .3s;
+        }
+
+        .btn-wa:hover {
+            background: #1ebe5d;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-carrito-modal {
+            background: transparent;
+            border: 1px solid rgba(232, 180, 184, .4);
+            color: var(--principal);
+            padding: 13px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all .3s;
+        }
+
+        .btn-carrito-modal:hover {
+            background: var(--principal);
+            color: #111;
+        }
+
+        .btn-carrito-modal.agregado {
+            background: var(--principal);
+            color: #111;
+        }
+
+        /* ─── PANEL CARRITO LATERAL ─── */
+        .carrito-panel {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            height: 100vh;
+            background: #181818;
+            border-left: 1px solid rgba(232, 180, 184, .2);
+            z-index: 3000;
+            padding: 30px;
+            overflow-y: auto;
+            transition: right .35s cubic-bezier(.4, 0, .2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .carrito-panel.abierto {
+            right: 0;
+        }
+
+        .carrito-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+
+        .carrito-header h3 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .carrito-cerrar {
+            background: rgba(255, 255, 255, .08);
+            border: none;
+            color: white;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s;
+        }
+
+        .carrito-cerrar:hover {
+            background: rgba(255, 255, 255, .18);
+        }
+
+        .carrito-lista {
+            flex: 1;
+        }
+
+        .carrito-item {
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid rgba(232, 180, 184, .15);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: fadeUp .25s ease;
+        }
+
+        .carrito-item-icono {
+            font-size: 1.5rem;
+            color: var(--principal);
+            flex-shrink: 0;
+        }
+
+        .carrito-item-info {
+            flex: 1;
+        }
+
+        .carrito-item-info .nombre {
+            color: white;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .carrito-item-info .precio {
+            color: var(--principal);
+            font-size: .85rem;
+            margin-top: 2px;
+        }
+
+        .carrito-item-quitar {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+            transition: color .2s;
+        }
+
+        .carrito-item-quitar:hover {
+            color: #ff8a8a;
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            color: #555;
+            padding: 60px 0;
+        }
+
+        .carrito-vacio i {
+            font-size: 3rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .carrito-footer {
+            border-top: 1px solid rgba(232, 180, 184, .15);
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+
+        .carrito-footer .btn-wa {
+            width: 100%;
+        }
+
+        .carrito-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .5);
+            z-index: 2999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+        }
+
+        .carrito-overlay.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
         @media (max-width: 576px) {
             .hero-content {
                 padding-left: 5%;
@@ -272,6 +717,20 @@
 
             .btn-flotante-reserva {
                 padding: 14px 18px;
+                right: 24px;
+            }
+
+            .carrito-flotante {
+                right: 80px;
+            }
+
+            .carrito-panel {
+                width: 100%;
+                right: -100%;
+            }
+
+            .modal-detalles {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -293,105 +752,543 @@
             <h1 class="hero-title">Somos tu<br><span>belleza</span></h1>
             <p class="hero-text">Realzamos tu belleza con técnicas modernas y atención personalizada.</p>
             <a href="#catalogo" class="btn-rosa">
-                <i class="fas fa-sparkles"></i> Ver servicios
+                <i class="fas fa-sparkles"></i> Ver catálogo
             </a>
         </div>
     </section>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a href="https://wa.me/595991948939?text=Hola.%20Quiero%20agendar%20una%20cita." class="btn-flotante-reserva"
-        target="_blank" rel="noopener noreferrer" aria-label="Reservar cita por WhatsApp">
+        target="_blank" rel="noopener noreferrer">
         <i class="fas fa-calendar-check"></i>
         <span>Reservar cita</span>
     </a>
 
-    <!-- CATÁLOGO CON FILTROS -->
+    <!-- BOTÓN FLOTANTE CARRITO -->
+    <button class="carrito-flotante" id="btnCarritoFlotante" onclick="abrirCarrito()">
+        <i class="fas fa-heart"></i>
+        <span>Mis intereses</span>
+        <div class="carrito-badge" id="carritoBadge">0</div>
+    </button>
+
+    <!-- CATÁLOGO -->
     <section id="catalogo">
         <div class="container">
             <h2 class="section-title">Nuestro catálogo</h2>
 
-            <!-- Filtros -->
-            <div class="filtros">
-                <button class="btn-filtro activo" onclick="filtrar('todos', this)">Todos</button>
-                <button class="btn-filtro" onclick="filtrar('servicios', this)">Servicios</button>
-                <button class="btn-filtro" onclick="filtrar('cursos', this)">Cursos</button>
-                <button class="btn-filtro" onclick="filtrar('promociones', this)">Promociones</button>
+            <nav class="nav-categorias">
+                <button class="tab-link activo" onclick="mostrarPanel('servicios', this)">
+                    <i class="fas fa-spa me-2"></i>Servicios
+                </button>
+                <button class="tab-link" onclick="mostrarPanel('cursos', this)">
+                    <i class="fas fa-chalkboard-teacher me-2"></i>Cursos
+                </button>
+                <button class="tab-link" onclick="mostrarPanel('promociones', this)">
+                    <i class="fas fa-tag me-2"></i>Promociones
+                </button>
+            </nav>
+
+            <!-- PANEL: SERVICIOS -->
+            <div id="panel-servicios" class="panel activo">
+                <div class="panel-banner">
+                    <div class="panel-banner-icon"><i class="fas fa-spa"></i></div>
+                    <div>
+                        <h3>Nuestros servicios</h3>
+                        <p>Tratamientos profesionales con productos de primera calidad y técnicas actualizadas.</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('corte')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-cut"></i></div>
+                                <h3 class="card-title">Corte & Coloración</h3>
+                                <p class="card-text">Cortes modernos y coloraciones personalizadas.</p>
+                                <div class="precio">Gs. 120.000 <small>en adelante</small></div>
+                                <button class="btn-agregar" id="btn-corte"
+                                    onclick="event.stopPropagation(); toggleCarrito('corte', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('maquillaje')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
+                                <h3 class="card-title">Maquillaje profesional</h3>
+                                <p class="card-text">Looks para eventos, sesiones de fotos o el día a día.</p>
+                                <div class="precio">Gs. 150.000 <small>en adelante</small></div>
+                                <button class="btn-agregar" id="btn-maquillaje"
+                                    onclick="event.stopPropagation(); toggleCarrito('maquillaje', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('manicura')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
+                                <h3 class="card-title">Manicura & Pedicura</h3>
+                                <p class="card-text">Cuidado completo de manos y pies con esmaltes de larga duración.
+                                </p>
+                                <div class="precio">Gs. 80.000 <small>en adelante</small></div>
+                                <button class="btn-agregar" id="btn-manicura"
+                                    onclick="event.stopPropagation(); toggleCarrito('manicura', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('keratina')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-leaf"></i></div>
+                                <h3 class="card-title">Tratamientos capilares</h3>
+                                <p class="card-text">Hidratación, keratina y reconstrucción para un cabello saludable.
+                                </p>
+                                <div class="precio">Gs. 200.000 <small>en adelante</small></div>
+                                <button class="btn-agregar" id="btn-keratina"
+                                    onclick="event.stopPropagation(); toggleCarrito('keratina', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('cejas')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                                <h3 class="card-title">Diseño de cejas</h3>
+                                <p class="card-text">Perfilado y diseño de cejas a medida de tu rostro.</p>
+                                <div class="precio">Gs. 50.000 <small>en adelante</small></div>
+                                <button class="btn-agregar" id="btn-cejas"
+                                    onclick="event.stopPropagation(); toggleCarrito('cejas', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Tarjetas -->
-            <div class="row g-4">
-
-                <!-- SERVICIOS -->
-                <div class="col-md-4 contenido servicios">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon"><i class="fas fa-cut"></i></div>
-                            <h3 class="card-title">Corte & Coloración</h3>
-                            <p class="card-text">Cortes modernos y coloraciones personalizadas a cargo de profesionales.
-                            </p>
+            <!-- PANEL: CURSOS -->
+            <div id="panel-cursos" class="panel">
+                <div class="panel-banner">
+                    <div class="panel-banner-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div>
+                        <h3>Formación profesional</h3>
+                        <p>Cursos con certificación y práctica real desde el primer día.</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('curso-maquillaje')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                                <h3 class="card-title">Curso de maquillaje</h3>
+                                <p class="card-text">Técnicas profesionales desde cero. Incluye kit de materiales.</p>
+                                <div class="precio">Gs. 800.000 <small>/ curso</small></div>
+                                <button class="btn-agregar" id="btn-curso-maquillaje"
+                                    onclick="event.stopPropagation(); toggleCarrito('curso-maquillaje', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('curso-color')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-cut"></i></div>
+                                <h3 class="card-title">Curso de colorimetría</h3>
+                                <p class="card-text">Mechas, balayage y color completo. Teoría y práctica.</p>
+                                <div class="precio">Gs. 1.200.000 <small>/ curso</small></div>
+                                <button class="btn-agregar" id="btn-curso-color"
+                                    onclick="event.stopPropagation(); toggleCarrito('curso-color', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('curso-nail')">
+                            <div class="card-body">
+                                <div class="card-icon"><i class="fas fa-hand-sparkles"></i></div>
+                                <h3 class="card-title">Curso de nail art</h3>
+                                <p class="card-text">Diseños en gel, acrílico y esmalte. Con certificación.</p>
+                                <div class="precio">Gs. 600.000 <small>/ curso</small></div>
+                                <button class="btn-agregar" id="btn-curso-nail"
+                                    onclick="event.stopPropagation(); toggleCarrito('curso-nail', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="col-md-4 contenido servicios">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon"><i class="fas fa-spa"></i></div>
-                            <h3 class="card-title">Maquillaje profesional</h3>
-                            <p class="card-text">Looks para eventos, sesiones de fotos o el día a día.</p>
+            <!-- PANEL: PROMOCIONES -->
+            <div id="panel-promociones" class="panel">
+                <div class="panel-banner">
+                    <div class="panel-banner-icon"><i class="fas fa-percent"></i></div>
+                    <div>
+                        <h3>Ofertas del mes</h3>
+                        <p>Aprovechá nuestras promociones exclusivas. ¡Por tiempo limitado!</p>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('promo-color')">
+                            <div class="card-body">
+                                <span class="badge-promo">20% OFF</span>
+                                <div class="card-icon"><i class="fas fa-paint-brush"></i></div>
+                                <h3 class="card-title">Coloración completa</h3>
+                                <p class="card-text">Todos los servicios de coloración este mes con 20% de descuento.
+                                </p>
+                                <div class="precio">Gs. 96.000 <small>antes Gs. 120.000</small></div>
+                                <button class="btn-agregar" id="btn-promo-color"
+                                    onclick="event.stopPropagation(); toggleCarrito('promo-color', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('promo-combo')">
+                            <div class="card-body">
+                                <span class="badge-promo">COMBO</span>
+                                <div class="card-icon"><i class="fas fa-star"></i></div>
+                                <h3 class="card-title">Corte + Hidratación</h3>
+                                <p class="card-text">Paquete especial a precio reducido.</p>
+                                <div class="precio">Gs. 180.000 <small>antes Gs. 240.000</small></div>
+                                <button class="btn-agregar" id="btn-promo-combo"
+                                    onclick="event.stopPropagation(); toggleCarrito('promo-combo', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card" onclick="abrirModal('promo-nueva')">
+                            <div class="card-body">
+                                <span class="badge-promo">NUEVO</span>
+                                <div class="card-icon"><i class="fas fa-gift"></i></div>
+                                <h3 class="card-title">Primera visita</h3>
+                                <p class="card-text">15% de descuento en cualquier servicio en tu primera visita.</p>
+                                <div class="precio">15% OFF <small>primera visita</small></div>
+                                <button class="btn-agregar" id="btn-promo-nueva"
+                                    onclick="event.stopPropagation(); toggleCarrito('promo-nueva', this)">
+                                    <i class="fas fa-heart"></i> Agregar a intereses
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- CURSOS -->
-                <div class="col-md-4 contenido cursos">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-                            <h3 class="card-title">Curso de maquillaje</h3>
-                            <p class="card-text">Aprende técnicas profesionales desde cero con nuestra metodología
-                                práctica.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PROMOCIONES -->
-                <div class="col-md-4 contenido promociones">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon"><i class="fas fa-tag"></i></div>
-                            <h3 class="card-title">20% de descuento</h3>
-                            <p class="card-text">Durante este mes, todos los servicios de coloración tienen un 20% de
-                                descuento.</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
 
+    <!-- ─── MODAL DE DETALLE ─── -->
+    <div class="modal-overlay" id="modalOverlay" onclick="cerrarModal(event)">
+        <div class="modal-box" id="modalBox">
+            <button class="modal-cerrar" onclick="cerrarModal()"><i class="fas fa-times"></i></button>
+            <div class="modal-icono" id="modalIcono"></div>
+            <div class="modal-categoria" id="modalCategoria"></div>
+            <h2 class="modal-titulo" id="modalTitulo"></h2>
+            <p class="modal-desc" id="modalDesc"></p>
+            <div class="modal-detalles" id="modalDetalles"></div>
+            <div class="modal-acciones">
+                <a class="btn-wa" id="modalBtnWA" href="#" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-whatsapp"></i> Consultar por este servicio
+                </a>
+                <button class="btn-carrito-modal" id="modalBtnCarrito" onclick="toggleCarritoDesdeModal()">
+                    <i class="fas fa-heart"></i> Agregar a mis intereses
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── PANEL CARRITO LATERAL ─── -->
+    <div class="carrito-overlay" id="carritoOverlay" onclick="cerrarCarrito()"></div>
+    <div class="carrito-panel" id="carritoPanel">
+        <div class="carrito-header">
+            <h3><i class="fas fa-heart me-2" style="color:var(--principal)"></i> Mis intereses</h3>
+            <button class="carrito-cerrar" onclick="cerrarCarrito()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="carrito-lista" id="carritoLista"></div>
+        <div class="carrito-footer" id="carritoFooter" style="display:none">
+            <a class="btn-wa" id="carritoWA" href="#" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Enviar consulta por WhatsApp
+            </a>
+        </div>
+    </div>
+
     <script>
-        function filtrar(categoria, boton) {
-            // Actualizar estado visual del botón activo
-            document.querySelectorAll('.btn-filtro').forEach(b => b.classList.remove('activo'));
-            if (boton) boton.classList.add('activo');
+        // ─── DATOS DE SERVICIOS ───
+        const datos = {
+            'corte': {
+                icono: 'fas fa-cut', categoria: 'Servicio', titulo: 'Corte & Coloración',
+                desc: 'Nuestro servicio de corte y coloración está a cargo de estilistas con años de experiencia. Trabajamos con técnicas modernas de balayage, mechas californianas, coloración total y cortes personalizados según tu tipo de cabello y rostro.',
+                detalles: [
+                    { label: 'Duración', valor: '1 a 2 horas' },
+                    { label: 'Precio desde', valor: 'Gs. 120.000' },
+                    { label: 'Incluye', valor: 'Lavado y secado' },
+                    { label: 'Modalidad', valor: 'Con cita previa' }
+                ]
+            },
+            'maquillaje': {
+                icono: 'fas fa-paint-brush', categoria: 'Servicio', titulo: 'Maquillaje profesional',
+                desc: 'Transformamos tu look para cualquier ocasión. Desde un maquillaje natural para el día a día hasta looks completos para eventos, casamientos y sesiones fotográficas. Usamos productos de marcas premium.',
+                detalles: [
+                    { label: 'Duración', valor: '45 min a 1 hora' },
+                    { label: 'Precio desde', valor: 'Gs. 150.000' },
+                    { label: 'Incluye', valor: 'Limpieza previa' },
+                    { label: 'Modalidad', valor: 'Con cita previa' }
+                ]
+            },
+            'manicura': {
+                icono: 'fas fa-hand-sparkles', categoria: 'Servicio', titulo: 'Manicura & Pedicura',
+                desc: 'Cuidado completo de manos y pies. Incluye limado, cutículas, hidratación y esmaltado en gel o esmalte común. También realizamos nail art y diseños personalizados.',
+                detalles: [
+                    { label: 'Duración', valor: '1 hora' },
+                    { label: 'Precio desde', valor: 'Gs. 80.000' },
+                    { label: 'Incluye', valor: 'Hidratación' },
+                    { label: 'Modalidad', valor: 'Con cita previa' }
+                ]
+            },
+            'keratina': {
+                icono: 'fas fa-leaf', categoria: 'Servicio', titulo: 'Tratamientos capilares',
+                desc: 'Ofrecemos hidratación profunda, keratina brasileña, botox capilar y reconstrucción para cabellos dañados. Devolvemos vida, brillo y suavidad a tu cabello con tratamientos de alta cosmética.',
+                detalles: [
+                    { label: 'Duración', valor: '2 a 3 horas' },
+                    { label: 'Precio desde', valor: 'Gs. 200.000' },
+                    { label: 'Resultado', valor: 'Hasta 3 meses' },
+                    { label: 'Modalidad', valor: 'Con cita previa' }
+                ]
+            },
+            'cejas': {
+                icono: 'fas fa-eye', categoria: 'Servicio', titulo: 'Diseño de cejas',
+                desc: 'Diseñamos la forma ideal de tus cejas según la estructura de tu rostro. Trabajamos con hilo, pinza y cera. También ofrecemos tintado de cejas y microblading.',
+                detalles: [
+                    { label: 'Duración', valor: '20 a 30 min' },
+                    { label: 'Precio desde', valor: 'Gs. 50.000' },
+                    { label: 'Técnica', valor: 'Hilo, pinza o cera' },
+                    { label: 'Modalidad', valor: 'Con o sin cita' }
+                ]
+            },
+            'curso-maquillaje': {
+                icono: 'fas fa-chalkboard-teacher', categoria: 'Curso', titulo: 'Curso de maquillaje profesional',
+                desc: 'Aprendé todas las técnicas del maquillaje profesional desde cero: base, corrector, contouring, smokey eye, delineado, labios y más. El curso incluye módulos teóricos y prácticos con modelos reales.',
+                detalles: [
+                    { label: 'Duración', valor: '4 semanas' },
+                    { label: 'Precio', valor: 'Gs. 800.000' },
+                    { label: 'Incluye', valor: 'Kit de materiales' },
+                    { label: 'Certificado', valor: 'Sí, al finalizar' }
+                ]
+            },
+            'curso-color': {
+                icono: 'fas fa-cut', categoria: 'Curso', titulo: 'Curso de colorimetría',
+                desc: 'Dominá la teoría del color y las técnicas más demandadas del mercado: mechas, balayage, color completo, decoloración y corrección de color. Ideal para quienes quieren iniciar o profesionalizarse.',
+                detalles: [
+                    { label: 'Duración', valor: '6 semanas' },
+                    { label: 'Precio', valor: 'Gs. 1.200.000' },
+                    { label: 'Nivel', valor: 'Básico a avanzado' },
+                    { label: 'Certificado', valor: 'Sí, al finalizar' }
+                ]
+            },
+            'curso-nail': {
+                icono: 'fas fa-hand-sparkles', categoria: 'Curso', titulo: 'Curso de nail art',
+                desc: 'Aprendé diseños en gel, acrílico y esmalte semipermanente. El curso cubre técnicas de extensión, nail art decorativo, francés y degradados. Práctica intensiva desde el primer día.',
+                detalles: [
+                    { label: 'Duración', valor: '3 semanas' },
+                    { label: 'Precio', valor: 'Gs. 600.000' },
+                    { label: 'Incluye', valor: 'Materiales básicos' },
+                    { label: 'Certificado', valor: 'Sí, al finalizar' }
+                ]
+            },
+            'promo-color': {
+                icono: 'fas fa-paint-brush', categoria: 'Promoción — 20% OFF', titulo: 'Coloración completa',
+                desc: 'Durante este mes todos los servicios de coloración tienen un 20% de descuento. Aprovechá para renovar tu look con balayage, mechas o color completo a precio especial.',
+                detalles: [
+                    { label: 'Precio normal', valor: 'Gs. 120.000' },
+                    { label: 'Precio promo', valor: 'Gs. 96.000' },
+                    { label: 'Ahorro', valor: 'Gs. 24.000' },
+                    { label: 'Válido hasta', valor: 'Fin de mes' }
+                ]
+            },
+            'promo-combo': {
+                icono: 'fas fa-star', categoria: 'Promoción — COMBO', titulo: 'Corte + Hidratación',
+                desc: 'Combo especial que incluye corte profesional más tratamiento hidratante profundo. Ideal para renovar tu cabello por completo en una sola visita.',
+                detalles: [
+                    { label: 'Precio normal', valor: 'Gs. 240.000' },
+                    { label: 'Precio combo', valor: 'Gs. 180.000' },
+                    { label: 'Ahorro', valor: 'Gs. 60.000' },
+                    { label: 'Duración', valor: '2 horas aprox.' }
+                ]
+            },
+            'promo-nueva': {
+                icono: 'fas fa-gift', categoria: 'Promoción — NUEVO', titulo: 'Descuento primera visita',
+                desc: 'Si es tu primera vez en nuestro salón, recibís un 15% de descuento en cualquier servicio. ¡Una manera de conocernos sin comprometer tu bolsillo!',
+                detalles: [
+                    { label: 'Descuento', valor: '15%' },
+                    { label: 'Aplica a', valor: 'Cualquier servicio' },
+                    { label: 'Condición', valor: 'Primera visita' },
+                    { label: 'Válido', valor: 'Sin fecha límite' }
+                ]
+            }
+        };
 
-            const items = document.querySelectorAll('.contenido');
+        // ─── CARRITO ───
+        let carrito = {};
+        let modalActual = null;
 
-            items.forEach(item => {
-                const mostrar = categoria === 'todos' || item.classList.contains(categoria);
-                item.style.display = mostrar ? '' : 'none';
-                // Re-disparar animación
-                if (mostrar) {
-                    item.style.animation = 'none';
-                    void item.offsetHeight; // reflow
-                    item.style.animation = '';
+        function toggleCarrito(id, btn) {
+            if (carrito[id]) {
+                delete carrito[id];
+            } else {
+                carrito[id] = datos[id];
+            }
+            actualizarUI();
+        }
+
+        function toggleCarritoDesdeModal() {
+            if (!modalActual) return;
+            toggleCarrito(modalActual, null);
+            actualizarBtnModal();
+        }
+
+        function actualizarUI() {
+            const total = Object.keys(carrito).length;
+            const badge = document.getElementById('carritoBadge');
+            const flotante = document.getElementById('btnCarritoFlotante');
+            badge.textContent = total;
+            flotante.classList.toggle('visible', total > 0);
+
+            // Actualizar botones de tarjetas
+            Object.keys(datos).forEach(id => {
+                const btn = document.getElementById('btn-' + id);
+                if (!btn) return;
+                const card = btn.closest('.card');
+                if (carrito[id]) {
+                    btn.innerHTML = '<i class="fas fa-heart-broken"></i> Quitar de intereses';
+                    btn.classList.add('agregado');
+                    card.classList.add('en-carrito');
+                } else {
+                    btn.innerHTML = '<i class="fas fa-heart"></i> Agregar a intereses';
+                    btn.classList.remove('agregado');
+                    card.classList.remove('en-carrito');
                 }
             });
+
+            renderCarritoPanel();
+        }
+
+        function actualizarBtnModal() {
+            const btn = document.getElementById('modalBtnCarrito');
+            if (!btn || !modalActual) return;
+            if (carrito[modalActual]) {
+                btn.innerHTML = '<i class="fas fa-heart-broken"></i> Quitar de intereses';
+                btn.classList.add('agregado');
+            } else {
+                btn.innerHTML = '<i class="fas fa-heart"></i> Agregar a mis intereses';
+                btn.classList.remove('agregado');
+            }
+        }
+
+        function renderCarritoPanel() {
+            const lista = document.getElementById('carritoLista');
+            const footer = document.getElementById('carritoFooter');
+            const keys = Object.keys(carrito);
+
+            if (keys.length === 0) {
+                lista.innerHTML = '<div class="carrito-vacio"><i class="fas fa-heart"></i><p>Todavía no agregaste ningún servicio.</p></div>';
+                footer.style.display = 'none';
+                return;
+            }
+
+            lista.innerHTML = keys.map(id => {
+                const item = datos[id];
+                return `
+            <div class="carrito-item">
+                <div class="carrito-item-icono"><i class="${item.icono}"></i></div>
+                <div class="carrito-item-info">
+                    <div class="nombre">${item.titulo}</div>
+                    <div class="precio">${item.categoria}</div>
+                </div>
+                <button class="carrito-item-quitar" onclick="toggleCarrito('${id}', null)" title="Quitar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>`;
+            }).join('');
+
+            footer.style.display = 'block';
+            const lista_texto = keys.map(id => '• ' + datos[id].titulo).join('%0A');
+            const msg = `Hola!%20Me%20interesa%20obtener%20más%20información%20sobre:%0A${lista_texto}%0A%0A¿Me%20pueden%20ayudar?`;
+            document.getElementById('carritoWA').href = `https://wa.me/595991948939?text=${msg}`;
+        }
+
+        function abrirCarrito() {
+            document.getElementById('carritoPanel').classList.add('abierto');
+            document.getElementById('carritoOverlay').classList.add('visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('carritoPanel').classList.remove('abierto');
+            document.getElementById('carritoOverlay').classList.remove('visible');
+            document.body.style.overflow = '';
+        }
+
+        // ─── MODAL ───
+        function abrirModal(id) {
+            const d = datos[id];
+            if (!d) return;
+            modalActual = id;
+
+            document.getElementById('modalIcono').innerHTML = `<i class="${d.icono}"></i>`;
+            document.getElementById('modalCategoria').textContent = d.categoria;
+            document.getElementById('modalTitulo').textContent = d.titulo;
+            document.getElementById('modalDesc').textContent = d.desc;
+
+            const detallesHTML = d.detalles.map(det => `
+            <div class="modal-detalle-item">
+                <div class="label">${det.label}</div>
+                <div class="valor">${det.valor}</div>
+            </div>`).join('');
+            document.getElementById('modalDetalles').innerHTML = detallesHTML;
+
+            const msg = `Hola!%20Me%20interesa%20el%20servicio%20de%20*${encodeURIComponent(d.titulo)}*.%20¿Me%20pueden%20dar%20más%20información?`;
+            document.getElementById('modalBtnWA').href = `https://wa.me/595991948939?text=${msg}`;
+
+            actualizarBtnModal();
+            document.getElementById('modalOverlay').classList.add('abierto');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarModal(event) {
+            if (event && event.target !== document.getElementById('modalOverlay')) return;
+            document.getElementById('modalOverlay').classList.remove('abierto');
+            document.body.style.overflow = '';
+            modalActual = null;
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                cerrarModal();
+                cerrarCarrito();
+            }
+        });
+
+        // ─── TABS ───
+        function mostrarPanel(panel, boton) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('activo'));
+            document.querySelectorAll('.tab-link').forEach(b => b.classList.remove('activo'));
+            document.getElementById('panel-' + panel).classList.add('activo');
+            boton.classList.add('activo');
         }
     </script>
-
 </body>
 
 </html>
